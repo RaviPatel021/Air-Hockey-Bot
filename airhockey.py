@@ -8,7 +8,7 @@ p.setAdditionalSearchPath(pybullet_data.getDataPath())  # For plane.urdf data
 p.setGravity(0, 0, -9.8)  # Set gravity, though air hockey doesn't have much
 
 # Load a flat plane to act as the air hockey table surface
-planeId = p.loadURDF("plane.urdf")
+planeId = p.loadURDF("air_hockey_table.urdf")
 
 # Set the simulation time step and disable real-time simulation
 p.setTimeStep(1/240)
@@ -40,7 +40,7 @@ create_wall([0, table_width / 2 + wall_thickness, wall_height / 2], [table_lengt
 create_wall([0, -table_width / 2 - wall_thickness, wall_height / 2], [table_length / 2, wall_thickness, wall_height])  # Bottom wall
 
 # Create the puck (as a cylinder)
-puckId = p.loadURDF("cylinder.urdf", basePosition=[0, 0, 0.05], globalScaling=1.0)
+puckId = p.loadURDF("puck.urdf", basePosition=[0, 0, 0.05], globalScaling=1.0)
 p.changeDynamics(puckId, -1, lateralFriction=0.0, rollingFriction=0.0, spinningFriction=0.0)  # Low friction for sliding
 
 # Create two paddles (as cylinders)

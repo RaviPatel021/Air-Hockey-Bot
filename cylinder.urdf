@@ -9,7 +9,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0" />
       <geometry>
-        <cylinder radius="0.08" length="0.05" /> <!-- Increased the length for thickness -->
+        <cylinder radius="0.08" length="0.02" />
       </geometry>
       <material name="green">
         <color rgba="0 1 0 1"/>
@@ -18,7 +18,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0" />
       <geometry>
-        <cylinder radius="0.08" length="0.05" /> <!-- Increased the length for thickness -->
+        <cylinder radius="0.08" length="0.02" />
       </geometry>
     </collision>
   </link>
