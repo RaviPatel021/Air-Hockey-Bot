@@ -11,7 +11,7 @@ p.setGravity(0, 0, -9.8)  # Set gravity, though air hockey doesn't have much
 planeId = p.loadURDF("air_hockey_table.urdf")
 
 # Set the simulation time step and disable real-time simulation
-p.setTimeStep(1/240)
+p.setTimeStep(1/150)
 p.setRealTimeSimulation(0)
 
 # Table dimensions
@@ -19,34 +19,14 @@ table_length = 1.8  # Length of the air hockey table (in meters)
 table_width = 1.0   # Width of the air hockey table (in meters)
 puck_radius = 0.0  # Radius of the puck (5 cm)
 
-# Create table walls (as simple boxes)
-def create_wall(position, half_extents):
-    visual_shape_id = p.createVisualShape(shapeType=p.GEOM_BOX, halfExtents=half_extents)
-    collision_shape_id = p.createCollisionShape(shapeType=p.GEOM_BOX, halfExtents=half_extents)
-    wall_id = p.createMultiBody(
-        baseMass=0,  # Static objects should have mass 0
-        baseCollisionShapeIndex=collision_shape_id, 
-        baseVisualShapeIndex=visual_shape_id, 
-        basePosition=position
-    )
-    return wall_id
-
-# Create four walls for the air hockey table
-wall_thickness = 0.05  # Thickness of the walls
-wall_height = 0.02  # Height of the walls (small for air hockey)
-create_wall([table_length / 2 + wall_thickness, 0, wall_height / 2], [wall_thickness, table_width / 2, wall_height])  # Right wall
-create_wall([-table_length / 2 - wall_thickness, 0, wall_height / 2], [wall_thickness, table_width / 2, wall_height])  # Left wall
-create_wall([0, table_width / 2 + wall_thickness, wall_height / 2], [table_length / 2, wall_thickness, wall_height])  # Top wall
-create_wall([0, -table_width / 2 - wall_thickness, wall_height / 2], [table_length / 2, wall_thickness, wall_height])  # Bottom wall
-
 # Create the puck (as a cylinder)
 puckId = p.loadURDF("puck.urdf", basePosition=[0, 0, 0.05], globalScaling=1.0)
 p.changeDynamics(puckId, -1, lateralFriction=0.0, rollingFriction=0.0, spinningFriction=0.0)  # Low friction for sliding
 
 # Create two paddles (as cylinders)
 paddle_radius = 0
-paddle1 = p.loadURDF("cylinder.urdf", basePosition=[-0.6, 0, 0.08], globalScaling=1)
-paddle2 = p.loadURDF("cylinder.urdf", basePosition=[0.6, 0, 0.08], globalScaling=1)
+paddle1 = p.loadURDF("cylinder.urdf", basePosition=[-0.6, 0, 0.2], globalScaling=1)
+paddle2 = p.loadURDF("cylinder.urdf", basePosition=[0.6, 0, 1.08], globalScaling=1)
 p.changeDynamics(paddle1, -1, lateralFriction=0.0, rollingFriction=0.0, spinningFriction=0.0)
 p.changeDynamics(paddle2, -1, lateralFriction=0.0, rollingFriction=0.0, spinningFriction=0.0)
 
@@ -55,7 +35,7 @@ def move_paddle(paddle_id, target_position):
     current_position, _ = p.getBasePositionAndOrientation(paddle_id)
     p.setCollisionFilterGroupMask(paddle_id, -1, 1, 1)
     p.setCollisionFilterPair(paddle_id, puckId, -1, -1, 1)
-    new_position = [target_position[0], target_position[1], paddle_radius]  # Keep the paddle above the surface
+    new_position = [target_position[0], target_position[1], target_position[2]]  # Keep the paddle above the surface
     p.resetBasePositionAndOrientation(paddle_id, new_position, [0, 0, 0, 1])
 
 # Simulate and move the paddle in real time
