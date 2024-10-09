@@ -12,7 +12,7 @@ This is a basic air hockey simulation created using the PyBullet physics engine.
 
 1. Clone this repository:
     ```bash
-    git clone [<repository-url>](https://github.com/RaviPatel021/Air-Hockey-Bot.git)
+    git clone https://github.com/RaviPatel021/Air-Hockey-Bot.git
     ```
 
 2. Install the required dependencies:
