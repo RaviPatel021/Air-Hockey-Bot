@@ -3,7 +3,7 @@
 This is a basic air hockey simulation created using the PyBullet physics engine. The simulation includes a puck and two paddles on an air hockey table. One paddle is controlled by the user using the keyboard (W, A, S, D) for movement. The puck and paddles have minimal friction to simulate the sliding effect on an air hockey table.
 
 ## Features
-- User-controlled paddle via keyboard (W, A, S, D)
+- User-controlled paddle via arrow keys (UP, DOWN, LEFT, RIGHT)
 - Minimal friction for realistic puck movement
 - Simple 2D movement of the paddle on the air hockey table
 - Visual simulation using PyBullet's GUI
@@ -26,10 +26,10 @@ This is a basic air hockey simulation created using the PyBullet physics engine.
     ```
 
 ## Controls
-- **W**: Move paddle up
-- **S**: Move paddle down
-- **A**: Move paddle left
-- **D**: Move paddle right
+- **UP**: Move paddle up
+- **DOWN**: Move paddle down
+- **LEFT**: Move paddle left
+- **RIGHT**: Move paddle right
 
 ## Dependencies
 - [PyBullet](https://github.com/bulletphysics/bullet3): The physics engine used for the simulation.

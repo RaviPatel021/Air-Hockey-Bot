@@ -14,19 +14,14 @@ planeId = p.loadURDF("air_hockey_table.urdf")
 p.setTimeStep(1/150)
 p.setRealTimeSimulation(0)
 
-# Table dimensions
-table_length = 1.8  # Length of the air hockey table (in meters)
-table_width = 1.0   # Width of the air hockey table (in meters)
-puck_radius = 0.0  # Radius of the puck (5 cm)
-
 # Create the puck (as a cylinder)
-puckId = p.loadURDF("puck.urdf", basePosition=[0, 0, 0.05], globalScaling=1.0)
+puckId = p.loadURDF("puck.urdf", basePosition=[0, 0, 0.05], globalScaling=1.0, flags=p.URDF_USE_IMPLICIT_CYLINDER)
 p.changeDynamics(puckId, -1, lateralFriction=0.0, rollingFriction=0.0, spinningFriction=0.0)  # Low friction for sliding
 
 # Create two paddles (as cylinders)
 paddle_radius = 0
-paddle1 = p.loadURDF("cylinder.urdf", basePosition=[-0.6, 0, 0.2], globalScaling=1)
-paddle2 = p.loadURDF("cylinder.urdf", basePosition=[0.6, 0, 1.08], globalScaling=1)
+paddle1 = p.loadURDF("cylinder.urdf", basePosition=[-0.6, 0, 0.2], globalScaling=1, flags=p.URDF_USE_IMPLICIT_CYLINDER)
+paddle2 = p.loadURDF("cylinder.urdf", basePosition=[0.6, 0, 1.08], globalScaling=1, flags=p.URDF_USE_IMPLICIT_CYLINDER)
 p.changeDynamics(paddle1, -1, lateralFriction=0.0, rollingFriction=0.0, spinningFriction=0.0)
 p.changeDynamics(paddle2, -1, lateralFriction=0.0, rollingFriction=0.0, spinningFriction=0.0)
 
@@ -42,17 +37,16 @@ def move_paddle(paddle_id, target_position):
 while True:
     keys = p.getKeyboardEvents()  # Read keyboard input
     
-    # Paddle 1 (controlled by user, moves with WASD)
-    paddle1_pos, _ = p.getBasePositionAndOrientation(paddle1)
-    if ord('w') in keys:
-        paddle1_pos = [paddle1_pos[0], paddle1_pos[1] + 0.01, paddle1_pos[2]]
-    if ord('s') in keys:
-        paddle1_pos = [paddle1_pos[0], paddle1_pos[1] - 0.01, paddle1_pos[2]]
-    if ord('a') in keys:
-        paddle1_pos = [paddle1_pos[0] - 0.01, paddle1_pos[1], paddle1_pos[2]]
-    if ord('d') in keys:
-        paddle1_pos = [paddle1_pos[0] + 0.01, paddle1_pos[1], paddle1_pos[2]]
-    
+    # Paddle 1 (controlled by user, moves with arrow keys)
+    if p.B3G_UP_ARROW in keys:
+        paddle1_pos = [paddle1_pos[0], paddle1_pos[1] + 0.01, paddle1_pos[2]]  # Move up
+    if p.B3G_DOWN_ARROW in keys:
+        paddle1_pos = [paddle1_pos[0], paddle1_pos[1] - 0.01, paddle1_pos[2]]  # Move down
+    if p.B3G_LEFT_ARROW in keys:
+        paddle1_pos = [paddle1_pos[0] - 0.01, paddle1_pos[1], paddle1_pos[2]]  # Move left
+    if p.B3G_RIGHT_ARROW in keys:
+        paddle1_pos = [paddle1_pos[0] + 0.01, paddle1_pos[1], paddle1_pos[2]]  # Move right
+
     move_paddle(paddle1, paddle1_pos)
     
     # Simulate physics step
