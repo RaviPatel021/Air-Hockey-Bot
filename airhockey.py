@@ -37,16 +37,17 @@ def move_paddle(paddle_id, target_position):
 while True:
     keys = p.getKeyboardEvents()  # Read keyboard input
     
-    # Paddle 1 (controlled by user, moves with arrow keys)
+    # Paddle 1 (controlled by user, moves with WASD)
+    paddle1_pos, _ = p.getBasePositionAndOrientation(paddle1)
     if p.B3G_UP_ARROW in keys:
-        paddle1_pos = [paddle1_pos[0], paddle1_pos[1] + 0.01, paddle1_pos[2]]  # Move up
+        paddle1_pos = [paddle1_pos[0], paddle1_pos[1] + 0.01, paddle1_pos[2]]
     if p.B3G_DOWN_ARROW in keys:
-        paddle1_pos = [paddle1_pos[0], paddle1_pos[1] - 0.01, paddle1_pos[2]]  # Move down
+        paddle1_pos = [paddle1_pos[0], paddle1_pos[1] - 0.01, paddle1_pos[2]]
     if p.B3G_LEFT_ARROW in keys:
-        paddle1_pos = [paddle1_pos[0] - 0.01, paddle1_pos[1], paddle1_pos[2]]  # Move left
+        paddle1_pos = [paddle1_pos[0] - 0.01, paddle1_pos[1], paddle1_pos[2]]
     if p.B3G_RIGHT_ARROW in keys:
-        paddle1_pos = [paddle1_pos[0] + 0.01, paddle1_pos[1], paddle1_pos[2]]  # Move right
-
+        paddle1_pos = [paddle1_pos[0] + 0.01, paddle1_pos[1], paddle1_pos[2]]
+    
     move_paddle(paddle1, paddle1_pos)
     
     # Simulate physics step
