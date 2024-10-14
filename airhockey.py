@@ -84,6 +84,26 @@ class AirHockeySimulation:
         # Set the new linear velocity for the paddle
         p.resetBaseVelocity(paddle_id, new_velocity, angular_velocity)
 
+
+
+    def get_observation(self):
+        """Get the current observation of the game, including puck and paddle states."""
+        # Get puck position and velocity
+        puck_position, _ = p.getBasePositionAndOrientation(self.puckId)
+        puck_velocity, _ = p.getBaseVelocity(self.puckId)
+        
+        # Get paddle 1 position and velocity
+        paddle1_position, _ = p.getBasePositionAndOrientation(self.paddle1)
+        paddle1_velocity, _ = p.getBaseVelocity(self.paddle1)
+
+        # Return the observation as a tuple of (puck_position, puck_velocity, paddle1_position, paddle1_velocity)
+        return {
+            "puck_position": (puck_position[0], puck_position[1]),
+            "puck_velocity": (puck_velocity[0], puck_velocity[1]),
+            "paddle1_position": (paddle1_position[0], paddle1_position[1]),
+            "paddle1_velocity": (paddle1_velocity[0], paddle1_velocity[1]),
+        }
+
     def apply_keyboard_controls(self):
         """Control the paddle movement using keyboard input with incremental velocity change."""
         keys = p.getKeyboardEvents()  # Read keyboard input
