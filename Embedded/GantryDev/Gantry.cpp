@@ -292,14 +292,6 @@ bool GantryClass::calibrate(){
   table_width_right = right_motor_top_right_position - right_motor_top_left_position;
   right_motor_bottom_left_position = right_motor_top_left_position - table_length_right;
 
-
-  // table_length_left = -855;
-  // table_width_left = -1465;
-  // left_motor_bottom_left_position = 988 - table_length_left;
-  // table_length_right = 855;
-  // table_width_right = -1465;
-  // right_motor_bottom_left_position = 988 - table_length_right;
-
   stepperL->setSpeedInHz(MAX_SPEED);
   stepperR->setSpeedInHz(MAX_SPEED);
 
