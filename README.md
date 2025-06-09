@@ -19,3 +19,65 @@ This repository contains all the code and hardware files for an autonomous air h
 ---
 
 More detailed documentation and setup instructions will be added soon.
+
+
+## 🚀 Getting Started
+
+These instructions will help you get the system running on your machine.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/air-hockey-table.git
+cd air-hockey-table
+````
+
+### 2. Install Python Dependencies
+
+Use Python 3.8–3.10. It's strongly recommended to use a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r laptop/requirements.txt
+```
+
+> ⚠️ On Jetson Nano, some packages (e.g., OpenCV, torch) may need to be installed with Jetson-specific wheels
+
+---
+
+## 🔧 Upload Firmware to ESP32
+
+The ESP32 controls the stepper motors through UART and must be flashed with the code in `embedded/`.
+
+You can upload the code using:
+
+* **Arduino IDE** (select ESP32 board, e.g. “ESP32 Dev Module”)
+
+
+Make sure you have the required libraries installed:
+
+* TMCStepper
+* FastAccelStepper
+
+---
+
+## ⚙️ Connect the System
+
+1. Connect the camera and ESP32 to your computer or Jetson Nano.
+2. Verify the serial port device (e.g., `/dev/ttyUSB0` on Linux or `COM3` on Windows).
+3. Adjust serial port settings in the Python code if necessary.
+
+---
+
+## ▶️ Running the Control Script
+
+From the `laptop/` or `Jetson_Nano/` directory, run:
+
+```bash
+python main.py
+```
+
+This will start the vision processing pipeline, detect the puck position, run the PPO model inference, and send velocity commands to the gantry controller.
+
+---
