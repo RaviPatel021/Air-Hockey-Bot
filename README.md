@@ -28,8 +28,8 @@ These instructions will help you get the system running on your machine.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/air-hockey-table.git
-cd air-hockey-table
+git clone https://github.com/RaviPatel021/Air-Hockey-Bot.git
+cd Air-Hockey-Bot
 ````
 
 ### 2. Install Python Dependencies
@@ -38,7 +38,7 @@ Use Python 3.8–3.10. It's strongly recommended to use a virtual environment:
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+venv\Scripts\activate  # Mac/Linux:: source venv/bin/activate
 pip install -r laptop/requirements.txt
 ```
 
