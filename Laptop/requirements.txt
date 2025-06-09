@@ -1,0 +1,18 @@
+opencv-python==4.11.0.86
+# numpy==1.24.4
+# pandas==2.1.4
+# torch==2.6.0
+stable-baselines3==2.2.1
+onnx==1.17.0
+onnxruntime
+pyserial==3.5
+
+
+sudo apt update
+sudo apt install python3-pip python3-opencv libatlas-base-dev libopenblas-dev liblapack-dev libjpeg-dev libtiff5-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev v4l-utils cmake unzip pkg-config
+
+pip3 install numpy pandas onnxruntime opencv-python pyserial
+
+pip3 install onnxruntime==1.15.1  # A known compatible version
+
+python3 -c "import cv2; cap = cv2.VideoCapture(0); print(cap.isOpened())"

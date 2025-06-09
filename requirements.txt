@@ -1,2 +1,0 @@
-pybullet
-pybullet_data
